@@ -4,9 +4,12 @@ import ToDoList from "./components/ToDoList";
 
 const todosInitialState = {
   todos: [
-    { id: "1", text: "finnish writing documentation" },
-    { id: "2", text: "buy books" },
-    { id: "3", text: "read books" },
+    { id: "1", text: "add date feature" },
+    { id: "2", text: "add move row up and down feature" },
+    { id: "3", text: "add local storage feature" },
+    { id: "4", text: "add Auth0 login feature" },
+    { id: "5", text: "add notifications feature" },
+    { id: "6", text: "add custom theme feature" },
   ],
 };
 
