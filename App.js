@@ -45,6 +45,27 @@ function todosReducer(state, action) {
         (todo) => todo.id !== action.payload.id
       );
       return { ...state, todos: filteredTodoState };
+    case "moveup":
+      const moveupToDo = { ...action.payload };
+      console.log("moveupToDo: " + JSON.stringify(moveupToDo));
+
+      const moveupToDoIndex = state.todos.findIndex(
+        (td) => td.id === action.payload.id
+      );
+      console.log("moveupToDoIndex: " + moveupToDoIndex);
+
+      if (moveupToDoIndex > 0) {
+        let replaceIndex = moveupToDoIndex - 1;
+        console.log("replaceIndex: " + replaceIndex);
+
+        [state.todos[replaceIndex], state.todos[moveupToDoIndex]] = [
+          state.todos[moveupToDoIndex],
+          state.todos[replaceIndex],
+        ];
+      }
+
+      return { ...state, todos: state.todos };
+
     default:
       return todosInitialState;
   }
