@@ -33,11 +33,20 @@ export default function ToDoList(props) {
 
   const renderHiddenItem = (data, rowMap) => (
     <View style={styles.rowBack}>
-      <TouchableOpacity onPress={() => editRow(data.item, rowMap)}>
+      <TouchableOpacity
+        style={[styles.backLeftBtn]}
+        onPress={() => editRow(data.item, rowMap)}
+      >
         <Text>Edit</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.backRightBtn]}
+        style={[styles.backRightLeftBtn]}
+        onPress={() => moveupRow(data.item)}
+      >
+        <Text style={{ color: "#FFF" }}>UP</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.backRightRightBtn]}
         onPress={() => deleteRow(data.item)}
       >
         <Text style={{ color: "#FFF" }}>Delete</Text>
@@ -56,6 +65,10 @@ export default function ToDoList(props) {
     if (rowMap[todo.id]) {
       rowMap[todo.id].closeRow();
     }
+  };
+
+  const moveupRow = (todo) => {
+    dispatch({ type: "moveup", payload: todo });
   };
 
   return (
@@ -82,7 +95,7 @@ export default function ToDoList(props) {
         renderItem={renderItem}
         renderHiddenItem={renderHiddenItem}
         leftOpenValue={75}
-        rightOpenValue={-75}
+        rightOpenValue={-150}
       />
     </View>
   );
@@ -104,7 +117,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingLeft: 15,
   },
-  backRightBtn: {
+  backLeftBtn: {
+    alignItems: "center",
+    bottom: 0,
+    justifyContent: "center",
+    position: "absolute",
+    top: 0,
+    width: 75,
+    backgroundColor: "orange",
+    left: 0,
+  },
+  backRightRightBtn: {
     alignItems: "center",
     bottom: 0,
     justifyContent: "center",
@@ -113,5 +136,15 @@ const styles = StyleSheet.create({
     width: 75,
     backgroundColor: "red",
     right: 0,
+  },
+  backRightLeftBtn: {
+    alignItems: "center",
+    bottom: 0,
+    justifyContent: "center",
+    position: "absolute",
+    top: 0,
+    width: 75,
+    backgroundColor: "#666",
+    right: 75,
   },
 });
