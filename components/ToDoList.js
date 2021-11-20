@@ -4,6 +4,9 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import { Header, Item, Input } from "native-base";
 import { StyleSheet, TouchableOpacity, View, Text, Button } from "react-native";
 import uuid from "uuid-random";
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function ToDoList(props) {
   // receive state and dispatch from App.js
@@ -37,19 +40,26 @@ export default function ToDoList(props) {
         style={[styles.backLeftBtn]}
         onPress={() => editRow(data.item, rowMap)}
       >
-        <Text>Edit</Text>
+        <FontAwesome name="edit" size={24} color="black" />
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.backRightLeftBtn]}
         onPress={() => moveupRow(data.item)}
       >
-        <Text style={{ color: "#FFF" }}>UP</Text>
+        <AntDesign name="upcircleo" size={24} color="black" />
       </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.backRightLeftLeftBtn]}
+        onPress={() => movedownRow(data.item)}
+      >
+        <AntDesign name="downcircle" size={24} color="black" />
+      </TouchableOpacity>
+
       <TouchableOpacity
         style={[styles.backRightRightBtn]}
         onPress={() => deleteRow(data.item)}
       >
-        <Text style={{ color: "#FFF" }}>Delete</Text>
+        <MaterialIcons name="delete-outline" size={24} color="black" />
       </TouchableOpacity>
     </View>
   );
@@ -69,6 +79,10 @@ export default function ToDoList(props) {
 
   const moveupRow = (todo) => {
     dispatch({ type: "moveup", payload: todo });
+  };
+
+  const movedownRow = (todo) => {
+    dispatch({ type: "movedown", payload: todo });
   };
 
   return (
@@ -133,7 +147,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
     top: 0,
-    width: 75,
+    width: 50,
     backgroundColor: "red",
     right: 0,
   },
@@ -143,8 +157,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
     top: 0,
-    width: 75,
+    width: 50,
     backgroundColor: "#666",
-    right: 75,
+    right: 50,
+  },
+  backRightLeftLeftBtn: {
+    alignItems: "center",
+    bottom: 0,
+    justifyContent: "center",
+    position: "absolute",
+    top: 0,
+    width: 50,
+    backgroundColor: "#666",
+    right: 100,
   },
 });
